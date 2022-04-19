@@ -89,8 +89,14 @@ function App() {
     }
   }
 
-  const editar = (id) => {
 
+
+
+
+
+
+  const editar = (id) => {
+"text"
 
   }
 
