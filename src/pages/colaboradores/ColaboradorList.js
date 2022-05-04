@@ -1,8 +1,11 @@
+import style from './ColaboradorList.module.css'
 const ColaboradorList = (props) => (
     <div>
+
+
+
       <h4>Listagem de colaboradores</h4>
       <button className="btn btn-success" onClick={props.inserir}>Inserir</button>
-  
       <table className="table">
         <thead>
           <tr>
@@ -19,7 +22,7 @@ const ColaboradorList = (props) => (
           {props.colaboradores.length > 0 ? (props.colaboradores.map((o, index) => (
               <tr key={index}>
                 <td>{index}</td><td>{o.id}</td> <td>{o.nome}</td> <td>{o.email}</td><td>{o.senha}</td>
-                <button onClick={() => props.editar(o._id)} className="btn btn-warning">Editar</button>
+                <button onClick={() => props.editar(o._id)}  className={style.editando}>Editar</button>
                 <button onClick={() => props.excluir(o._id)} className="btn btn-danger">Excluir</button> 
               </tr>
             ))) : (

@@ -1,4 +1,4 @@
-import axios from "./api";
+import axios from "../../services/api";
 class UsuarioSrv {
     url = "/colaborador";
     async listar() {
