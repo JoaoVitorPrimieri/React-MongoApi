@@ -1,38 +1,73 @@
-import style from './ColaboradorList.module.css'
-const ColaboradorList = (props) => (
+import React, { useState, useEffect } from "react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Dropdown } from "primereact/dropdown";
+
+const template2 = {
+    layout: 'RowsPerPageDropdown CurrentPageReport PrevPageLink NextPageLink',
+    'RowsPerPageDropdown': (options) => {
+        const dropdownOptions = [
+            { label: 5, value: 5 },
+            { label: 10, value: 10 },
+            { label: 15, value: 15 }
+        ];
+
+        return (
+            <React.Fragment>
+                <span className="mx-1" style={{ color: 'var(--text-color)', userSelect: 'none'}}>Itens por página: </span>
+                <Dropdown value={options.value} options={dropdownOptions} onChange={options.onChange} />
+            </React.Fragment>
+        );
+    },
+    'CurrentPageReport': (options) => {
+        return (
+            <span style={{ color: 'var(--text-color)', userSelect: 'none', width: '120px', textAlign: 'center' }}>
+                {options.first} - {options.last} of {options.totalRecords}
+            </span>
+        )
+    }
+};
+
+const ColaboradorList = (props) => {
+  const countryBodyTemplate = (rowData) => {
+    return (
+        <React.Fragment>
+           <button onClick={() => props.editar(rowData._id)}  className="btn btn-danger">Editar</button>
+            <button onClick={() => props.excluir(rowData._id)} className="btn btn-danger">Excluir</button> 
+        </React.Fragment>
+    );
+}
+  return(
+  <div>   
     <div>
-
-
-
-      <h4>Listagem de colaboradores</h4>
-      <button className="btn btn-success" onClick={props.inserir}>Inserir</button>
-      <table className="table">
-        <thead>
-          <tr>
-            {" "}
-            <th>Index</th>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Senha</th>
-            <th>Operações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.colaboradores.length > 0 ? (props.colaboradores.map((o, index) => (
-              <tr key={index}>
-                <td>{index}</td><td>{o.id}</td> <td>{o.nome}</td> <td>{o.email}</td><td>{o.senha}</td>
-                <button onClick={() => props.editar(o._id)}  className={style.editando}>Editar</button>
-                <button onClick={() => props.excluir(o._id)} className="btn btn-danger">Excluir</button> 
-              </tr>
-            ))) : (
-            <tr>
-              <td colSpan={3}>Nenhum colaborador.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  )
-  export default ColaboradorList
-  
+      <h4>Listagem de Colaboradores</h4>
+      <button
+        button
+        type="button"
+        className="btn btn-light btn-sm"
+        onClick={props.onClickAtualizar}
+      >
+        Atualizar
+      </button>
+      <button
+        type="button"
+        className="btn btn-light btn-sm"
+        onClick={props.inserir}
+      >
+        Inserir
+      </button>
+      <div className="card">
+        <DataTable value={props.colaboradores} responsiveLayout="scroll" paginator paginatorTemplate={template2} rows={8} 
+                    paginatorClassName="justify-content-center" className="mt-6">
+          <Column field="_id" header="ID" sortable filter></Column>
+          <Column field="nome" header="Nome" sortable filter></Column>
+          <Column field="email" header="E-mail" sortable filter></Column>
+          <Column header="Operações" body={countryBodyTemplate}></Column>
+          {/* <Column field={<button onClick={() => props.editar()} className="btn btn-light btn-sm">Editar</button>}></Column>  */}
+        </DataTable>
+      </div>
+    </div>  
+  </div>
+);
+  }
+export default ColaboradorList;

@@ -25,22 +25,25 @@ function ColaboradorCont() {
   }, []);
 
   const onClickAtualizar = () => {
-    ColaboradorSrv.listar().then(response => {
-      setColaboradores(response.data);
-      toastRef.current.show({
-        severity: 'success',
-        summary: "Colaborador atualizados",
-        life: 3000
-      });
-    })
-      .catch(e => {
+    ColaboradorSrv.listar()
+      .then((response) => {
+        setColaboradores(response.data);
         toastRef.current.show({
-          severity: 'error',
+          severity: "success",
+          summary: "Colaboradores atualizados",
+          life: 3000,
+        });
+      })
+      .catch((e) => {
+        toastRef.current.show({
+          severity: "error",
           summary: e.message,
-          life: 3000
+          life: 3000,
         });
       });
-  }
+  };
+
+
   React.useEffect(() => {
     api
       .get("/colaborador")
@@ -83,7 +86,7 @@ function ColaboradorCont() {
   }
 
   const editar = (id) => {
-    setColaboradores(colaboradores.filter((colaborador) => colaborador._id == id)[0]);
+    setColaborador(colaboradores.filter((colaborador) => colaborador._id === id)[0]);
     setEditando(true);
   }
 
@@ -126,9 +129,9 @@ function ColaboradorCont() {
           inserir={inserir}
           editar={editar}
           excluir={excluir} />
-          
-          <Toast ref={toastRef} />
-          
+
+        <Toast ref={toastRef} />
+
       </div>
     );
   } else {
