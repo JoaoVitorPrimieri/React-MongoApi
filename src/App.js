@@ -10,6 +10,9 @@ import Menu from'./Menu'
 
 const Home = lazy(() => import('./pages/home/home'));
 const ColaboradorCon = lazy(() => import('./pages/colaboradores/ColaboradorCon'));
+const SolicitanteCon = lazy(() => import('./pages/solicitantes/SolicitanteCon'));
+const TipoRequisicaoCon = lazy(() => import('./pages/tipoRequisicao/TipoRequisicaoCon'));
+const RequisicaoCon = lazy(() => import('./pages/requisicoes/RequisicaoCon'));
 
 function App() {
 
@@ -23,6 +26,10 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/colaboradores" element={<ColaboradorCon />} />
+          <Route path="/solicitantes" element={<SolicitanteCon />} />
+          <Route path="/tipoRequisicao" element={<TipoRequisicaoCon />} />
+          <Route path="/requisicao" element={<RequisicaoCon />} />
+
         </Routes>
       </Suspense>
     </BrowserRouter>

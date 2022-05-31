@@ -15,6 +15,18 @@ function Menu() {
           {
             label: 'Colaboradores', icon: 'pi pi-fw pi-user',
             command: () => { navigate("/colaboradores") }
+          },
+          {
+            label: 'Solicitante', icon: 'pi pi-fw pi-user',
+            command: () => { navigate("/solicitantes") }
+          },
+          {
+            label: 'Tipo Requisição', icon: 'pi pi-fw pi-user',
+            command: () => { navigate("/tipoRequisicao") }
+          },
+          {
+            label: 'Requisicao', icon: 'pi pi-fw pi-user',
+            command: () => { navigate("/requisicao") }
           }
         ]
       },

@@ -28,7 +28,7 @@ const template2 = {
     }
 };
 
-const ColaboradorList = (props) => {
+const SolicitanteList = (props) => {
   const countryBodyTemplate = (rowData) => {
     return (
         <React.Fragment>
@@ -40,7 +40,7 @@ const ColaboradorList = (props) => {
   return(
   <div>   
     <div>
-      <h4>Listagem de Colaboradores</h4>
+      <h4>Listagem de Solicitantes</h4>
       <button
         button
         type="button"
@@ -57,7 +57,7 @@ const ColaboradorList = (props) => {
         Inserir
       </button>
       <div className="card">
-        <DataTable value={props.colaboradores} responsiveLayout="scroll" selectionMode="single" paginator paginatorTemplate={template2} rows={8} 
+        <DataTable value={props.solicitantes} responsiveLayout="scroll" selectionMode="single" paginator paginatorTemplate={template2} rows={8} 
                     paginatorClassName="justify-content-center" className="mt-6">
           <Column field="_id" header="ID" sortable filter></Column>
           <Column field="nome" header="Nome" sortable filter></Column>
@@ -70,4 +70,4 @@ const ColaboradorList = (props) => {
   </div>
 );
   }
-export default ColaboradorList;
+export default SolicitanteList;
