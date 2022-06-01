@@ -1,0 +1,14 @@
+#edit{
+    background-color: yellow;
+    width: 60px;
+    height: 42px;
+}
+#deletar{
+    background-color: red;
+    width: 60px;
+    height: 42px;
+}
+
+.til:hover{
+    color:#008080;
+}

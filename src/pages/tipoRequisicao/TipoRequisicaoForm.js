@@ -1,30 +1,56 @@
 import React from "react";
-const tipoRequisicaoForm = (props) => {
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { useForm } from "react-hook-form";
+
+const TipoRequisicaoForm = (props) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    props.settipoRequisicao({ ...props.tipoRequisicao, [name]: value });
+    props.setTipoRequisicao({ ...props.tipoRequisicao, [name]: value });
   };
 
+
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = data => {
+    //console.log(data);
+
+
+
+
+  }
+
   return (
-    <form>
-       <div className="form-group">
-        <label>Id</label>
-        <input className="form-control" type="text" name="id"
-          value={props.tipoRequisicao._id} onChange={handleInputChange} />
-      </div>
-      <div className="form-group">
-        <label>Descrição</label>
-        <input className="form-control" type="text" name="tipoRequisicao"
-          value={props.tipoRequisicao.nome} onChange={handleInputChange} />
-      </div>
-    
-      <div className="form-group">
-        <button type="button" onClick={props.salvar}
-          className="btn btn-primary btn-sm">Salvar</button>
-        <button type="button" onClick={props.cancelar}
-          className="btn btn-primary btn-sm">Cancelar</button>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div style={{ padding: 15 }}>
+        <div className="card">
+          <h5>Cadastro de Tipo Requisição</h5>
+          <div className="p-fluid grid formgrid">
+            <div className="field col-12 md:col-4">
+              <label htmlFor="descricao">Descricao</label>
+              <InputText name="descricao" {...register("descricao", {
+                required: { value: true, message: 'O nome é obrigatório!' },
+                maxLength: { value: 50, message: 'O nome pode ter no máximo 50 caracteres!' },
+                minLength: { value: 2, message: 'O nome pode ter no mínimo 2 caracteres!' },
+              })}
+                defaultValue={props.tipoRequisicao.descricao} onChange={handleInputChange} />
+              {errors.descricao && <span style={{ color: 'red' }}>{errors.descricao.message}</span>}
+            </div>
+          </div>
+          <div>
+            <Button type="submit" icon="pi pi-pencil" className="p-button-rounded p-button-text "
+              label="Salvar" onClick={props.salvar}></Button>
+            <Button type="button" icon="pi pi-trash" className="p-button-rounded p-button-text"
+              label="Cancelar" onClick={props.cancelar}></Button>
+
+          </div>
+
+
+
+        </div>
       </div>
     </form>
   );
 };
-export default tipoRequisicaoForm;
+export default TipoRequisicaoForm;

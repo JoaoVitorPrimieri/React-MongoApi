@@ -139,7 +139,7 @@ function TipoRequisicaoCont() {
       <div className="App">
         <TipoRequisicaoForm
           tipoRequisicao={tipoRequisicao}
-          settipoRequisicao={setTipoRequisicao}
+          setTipoRequisicao={setTipoRequisicao}
           salvar={salvar}
           cancelar={cancelar} />
         <Toast ref={toastRef} />

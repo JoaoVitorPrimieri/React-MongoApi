@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import api from "../../services/api";
-import RequisicaoList from "./RequisicaoList";
-import RequisicaoForm from "./RequisicaoForm";
-import RequisicaoSrv from "./RequisicaoSrv";
-import TipoRequisicaoSrv from "../tipoRequisicao/TipoRequisicaoSrv";
-import SolicitanteSrv from "../solicitantes/SolicitanteSrv";
+import AtividadeList from "./AtividadeList";
+import AtividadeForm from "./AtividadeForm";
+import AtividadeSrv from "./AtividadeSrv";
+import RequisicaoSrv from "../requisicoes/RequisicaoSrv";
+import ColaboradorSrv from "../colaboradores/ColaboradorSrv";
 
 import { Toast } from 'primereact/toast';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
@@ -14,19 +14,18 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 
-function RequisicaoCont() {
+function AtividadeCont() {
 
   const [tipoRequisicoes, setTipoRequisicoes] = useState([]);
-  const [solicitantes, setSolicitantes] = useState([]);
-  const [requisicoes, setRequisicoes] = useState([]);
+  const [atividades, setAtividades] = useState([]);
   const toastRef = useRef();
   const initialState = { id: null, titulo: '', descricao: '', dataHora: '', status: '', prazoAtendimento: '', tipoRequisicao: '', solicitante: '' }
-  const [requisicao, setRequisicao] = useState(initialState)
+  const [atividade, setAtividade] = useState(initialState)
   const [editando, setEditando] = useState(false)
 
   useEffect(() => {
     onClickAtualizar(); // ao inicializar execula método para atualizar
-    TipoRequisicaoSrv.listar()
+    RequisicaoSrv.listar()
     .then((response) => {
       setTipoRequisicoes(response.data);
       toastRef.current.show({
@@ -42,12 +41,12 @@ function RequisicaoCont() {
         life: 3000,
       });
     });
-    SolicitanteSrv.listar()
+    ColaboradorSrv.listar()
     .then((response) => {
-      setSolicitantes(response.data);
+      setTipoRequisicoes(response.data);
       toastRef.current.show({
         severity: "success",
-        summary: "solicitantes atualizados",
+        summary: "tipoRequisicoes atualizados",
         life: 3000,
       });
     })
@@ -59,11 +58,12 @@ function RequisicaoCont() {
       });
     });
   }, []);
+  
 
   const onClickAtualizar = () => {
-    RequisicaoSrv.listar()
+    AtividadeSrv.listar()
       .then((response) => {
-        setRequisicoes(response.data);
+        setAtividades(response.data);
         toastRef.current.show({
           severity: "success",
           summary: "Requisicao atualizado",
@@ -82,8 +82,8 @@ function RequisicaoCont() {
 
   React.useEffect(() => {
     api
-      .get("/requisicao")
-      .then((response) => setRequisicoes(response.data))
+      .get("/atividades")
+      .then((response) => setAtividades(response.data))
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       });
@@ -92,7 +92,7 @@ function RequisicaoCont() {
 
 
   const inserir = () => {
-    setRequisicao(initialState);
+    setAtividade(initialState);
     setEditando(true);
   }
   const cancelar = () => {
@@ -100,8 +100,8 @@ function RequisicaoCont() {
     setEditando(false);
   }
   const salvar = () => {
-    if (requisicao._id == null) { // inclussão
-      RequisicaoSrv.incluir(requisicao).then(response => {
+    if (atividade._id == null) { // inclussão
+      AtividadeSrv.incluir(atividade).then(response => {
         setEditando(false);
         onClickAtualizar();
         toastRef.current.show({ severity: 'success', summary: "Salvou", life: 2000 });
@@ -110,7 +110,7 @@ function RequisicaoCont() {
           toastRef.current.show({ severity: 'error', summary: e.message, life: 4000 });
         });
     } else { // alteração
-      RequisicaoSrv.alterar(requisicao).then(response => {
+      AtividadeSrv.alterar(atividade).then(response => {
         setEditando(false);
         onClickAtualizar();
         toastRef.current.show({ severity: 'success', summary: "Salvou", life: 2000 });
@@ -122,7 +122,7 @@ function RequisicaoCont() {
   }
 
   const editar = (id) => {
-    setRequisicao(requisicoes.filter((requisicao) => requisicao._id === id)[0]);
+    setAtividade(atividade.filter((atividade) => atividade._id === id)[0]);
     setEditando(true);
   }
 
@@ -140,7 +140,7 @@ function RequisicaoCont() {
 
   const excluirConfirm = (_id) => {
 
-    RequisicaoSrv.excluir(_id).then(response => {
+    AtividadeSrv.excluir(_id).then(response => {
       onClickAtualizar();
       toastRef.current.show({
         severity: 'success',
@@ -160,8 +160,8 @@ function RequisicaoCont() {
       <div className="App">
         <Toast ref={toastRef} />
         <ConfirmDialog />
-        <RequisicaoList
-          requisicoes={requisicoes}
+        <AtividadeList
+          atividades={atividade}
           inserir={inserir}
           editar={editar}
           excluir={excluir} />
@@ -173,11 +173,10 @@ function RequisicaoCont() {
   } else {
     return (
       <div className="App">
-        <RequisicaoForm
-          requisicao={requisicao}
+        <AtividadeForm
+          atividade={atividade}
           tipoRequisicoes={tipoRequisicoes}
-          solicitantes={solicitantes}
-          setRequisicao={setRequisicao}
+          setAtividade={setAtividade}
           salvar={salvar}
           cancelar={cancelar} />
         <Toast ref={toastRef} />
@@ -187,4 +186,4 @@ function RequisicaoCont() {
   }
 }
 
-export default RequisicaoCont;
+export default AtividadeCont;
