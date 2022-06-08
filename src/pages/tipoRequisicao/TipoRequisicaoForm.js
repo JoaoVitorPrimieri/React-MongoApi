@@ -26,17 +26,19 @@ const TipoRequisicaoForm = (props) => {
       <div style={{ padding: 15 }}>
         <div className="card">
           <h5>Cadastro de Tipo Requisição</h5>
+          <div style={{marginLeft: "33em"}}>
           <div className="p-fluid grid formgrid">
             <div className="field col-12 md:col-4">
               <label htmlFor="descricao">Descricao</label>
               <InputText name="descricao" {...register("descricao", {
-                required: { value: true, message: 'O nome é obrigatório!' },
-                maxLength: { value: 50, message: 'O nome pode ter no máximo 50 caracteres!' },
-                minLength: { value: 2, message: 'O nome pode ter no mínimo 2 caracteres!' },
+                required: { value: true, message: 'A descrição é obrigatória!' },
+                maxLength: { value: 50, message: 'A descrição pode ter no máximo 50 caracteres!' },
+                minLength: { value: 2, message: 'A descrição pode ter no mínimo 2 caracteres!' },
               })}
                 defaultValue={props.tipoRequisicao.descricao} onChange={handleInputChange} />
               {errors.descricao && <span style={{ color: 'red' }}>{errors.descricao.message}</span>}
             </div>
+          </div>
           </div>
           <div>
             <Button type="submit" icon="pi pi-pencil" className="p-button-rounded p-button-text "

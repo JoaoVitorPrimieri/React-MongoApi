@@ -27,6 +27,10 @@ function Menu() {
           {
             label: 'Requisicao', icon: 'pi pi-fw pi-user',
             command: () => { navigate("/requisicao") }
+          },
+          {
+            label: 'Atividade', icon: 'pi pi-fw pi-user',
+            command: () => { navigate("/atividade") }
           }
         ]
       },

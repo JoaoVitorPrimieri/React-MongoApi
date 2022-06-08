@@ -13,8 +13,12 @@ const ColaboradorCon = lazy(() => import('./pages/colaboradores/ColaboradorCon')
 const SolicitanteCon = lazy(() => import('./pages/solicitantes/SolicitanteCon'));
 const TipoRequisicaoCon = lazy(() => import('./pages/tipoRequisicao/TipoRequisicaoCon'));
 const RequisicaoCon = lazy(() => import('./pages/requisicoes/RequisicaoCon'));
+const AtividadeCon = lazy(() => import('./pages/atividades/AtividadeCon'));
+
+sessionStorage.setItem('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjlmZDdkMmFhNDQxYWVlZGQxNTE1N2UiLCJub21lIjoiQnJ1bm8iLCJpYXQiOjE2NTQ2NDk4MjcsImV4cCI6MTY1NDY1MzQyN30.0yocczG928UURYsuICoDfruc7QqixW5omHeoa4kS5ow');
 
 function App() {
+
 
 
 
@@ -29,6 +33,7 @@ function App() {
           <Route path="/solicitantes" element={<SolicitanteCon />} />
           <Route path="/tipoRequisicao" element={<TipoRequisicaoCon />} />
           <Route path="/requisicao" element={<RequisicaoCon />} />
+          <Route path="/atividade" element={<AtividadeCon />} />
 
         </Routes>
       </Suspense>

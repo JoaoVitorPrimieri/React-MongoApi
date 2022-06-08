@@ -30,7 +30,8 @@ const SolicitanteForm = (props) => {
      <div style={{padding:15}}>
             <div className="card">
                 <h5>Cadastro de Solicitante</h5>
-                <div className="p-fluid grid formgrid">
+                <div style={{marginLeft: "33em"}}>
+                <div  className="p-fluid grid formgrid">
                     <div className="field col-12 md:col-4">
                         <label htmlFor="nome">Nome</label>
                         <InputText name="nome" {...register("nome", { 
@@ -70,6 +71,7 @@ const SolicitanteForm = (props) => {
                                    onChange={ e => setContraSenhas(e.target.value)} />
                     </div>
                 </div>                         
+                </div>
 
 
 
@@ -84,6 +86,7 @@ const SolicitanteForm = (props) => {
                 
                 
             </div>
+            
         </div>
     </form>
   );

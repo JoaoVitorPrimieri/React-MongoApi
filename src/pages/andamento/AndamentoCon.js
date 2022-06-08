@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import api from "../../services/api";
-import AtividadeList from "./AtividadeList";
-import AtividadeForm from "./AtividadeForm";
-import AtividadeSrv from "./AtividadeSrv";
-import RequisicaoSrv from "../requisicoes/RequisicaoSrv";
+import AndamentoList from "./AndamentoList";
+import AndamentoForm from "./AndamentoForm";
+import AndamentoSrv from "./AndamentoSrv";
 import ColaboradorSrv from "../colaboradores/ColaboradorSrv";
+import AtividadeSrv from "../atividades/AtividadeSrv";
 
 import { Toast } from 'primereact/toast';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
@@ -14,21 +14,21 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 
-function AtividadeCont() {
+function AndamentoCont() {
 
-  const [requisicoes, setRequisicoes] = useState([]);
   const [colaboradores, setColaboradores] = useState([]);
   const [atividades, setAtividades] = useState([]);
+  const [andamentos, setAndamentos] = useState([]);
   const toastRef = useRef();
   const initialState = { id: null, titulo: '', descricao: '', dataHora: '', status: '', prazoAtendimento: '', tipoRequisicao: '', solicitante: '' }
-  const [atividade, setAtividade] = useState(initialState)
+  const [andamento, setAndamento] = useState(initialState)
   const [editando, setEditando] = useState(false)
 
   useEffect(() => {
     onClickAtualizar(); // ao inicializar execula método para atualizar
-    RequisicaoSrv.listar()
+    ColaboradorSrv.listar()
     .then((response) => {
-      setRequisicoes(response.data);
+      setColaboradores(response.data);
       toastRef.current.show({
         severity: "success",
         summary: "tipoRequisicoes atualizados",
@@ -42,12 +42,12 @@ function AtividadeCont() {
         life: 3000,
       });
     });
-    ColaboradorSrv.listar()
+    AtividadeSrv.listar()
     .then((response) => {
-      setRequisicoes(response.data);
+      setAtividades(response.data);
       toastRef.current.show({
         severity: "success",
-        summary: "tipoRequisicoes atualizados",
+        summary: "solicitantes atualizados",
         life: 3000,
       });
     })
@@ -59,12 +59,11 @@ function AtividadeCont() {
       });
     });
   }, []);
-  
 
   const onClickAtualizar = () => {
-    AtividadeSrv.listar()
+    AndamentoSrv.listar()
       .then((response) => {
-        setColaboradores(response.data);
+        setAndamentos(response.data);
         toastRef.current.show({
           severity: "success",
           summary: "Requisicao atualizado",
@@ -83,8 +82,8 @@ function AtividadeCont() {
 
   React.useEffect(() => {
     api
-      .get("/atividade")
-      .then((response) => setAtividades(response.data))
+      .get("/andamento")
+      .then((response) => setAndamentos(response.data))
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
       });
@@ -93,7 +92,7 @@ function AtividadeCont() {
 
 
   const inserir = () => {
-    setAtividade(initialState);
+    setAndamentos(initialState);
     setEditando(true);
   }
   const cancelar = () => {
@@ -101,8 +100,8 @@ function AtividadeCont() {
     setEditando(false);
   }
   const salvar = () => {
-    if (atividade._id == null) { // inclussão
-      AtividadeSrv.incluir(atividade).then(response => {
+    if (andamento._id == null) { // inclussão
+      AndamentoSrv.incluir(andamento).then(response => {
         setEditando(false);
         onClickAtualizar();
         toastRef.current.show({ severity: 'success', summary: "Salvou", life: 2000 });
@@ -111,7 +110,7 @@ function AtividadeCont() {
           toastRef.current.show({ severity: 'error', summary: e.message, life: 4000 });
         });
     } else { // alteração
-      AtividadeSrv.alterar(atividade).then(response => {
+      AndamentoSrv.alterar(andamento).then(response => {
         setEditando(false);
         onClickAtualizar();
         toastRef.current.show({ severity: 'success', summary: "Salvou", life: 2000 });
@@ -123,7 +122,7 @@ function AtividadeCont() {
   }
 
   const editar = (id) => {
-    setAtividade(atividades.filter((atividade) => atividade._id === id)[0]);
+    setAndamento(andamentos.filter((andamento) => andamento._id === id)[0]);
     setEditando(true);
   }
 
@@ -141,7 +140,7 @@ function AtividadeCont() {
 
   const excluirConfirm = (_id) => {
 
-    AtividadeSrv.excluir(_id).then(response => {
+    AndamentoSrv.excluir(_id).then(response => {
       onClickAtualizar();
       toastRef.current.show({
         severity: 'success',
@@ -161,8 +160,8 @@ function AtividadeCont() {
       <div className="App">
         <Toast ref={toastRef} />
         <ConfirmDialog />
-        <AtividadeList
-          atividades={atividades}
+        <AndamentoList
+          andamentos={andamentos}
           inserir={inserir}
           editar={editar}
           excluir={excluir} />
@@ -174,11 +173,11 @@ function AtividadeCont() {
   } else {
     return (
       <div className="App">
-        <AtividadeForm
-          atividade={atividade}
+        <AndamentoForm
+          andamento={andamento}
           colaboradores={colaboradores}
-          requisicoes={requisicoes}
-          setAtividade={setAtividade}
+          atividades={atividades}
+          setAndamento={setAndamento}
           salvar={salvar}
           cancelar={cancelar} />
         <Toast ref={toastRef} />
@@ -188,4 +187,4 @@ function AtividadeCont() {
   }
 }
 
-export default AtividadeCont;
+export default AndamentoCont;

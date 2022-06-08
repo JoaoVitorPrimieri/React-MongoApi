@@ -28,7 +28,7 @@ const template2 = {
     }
 };
 
-const AtividadeList = (props) => {
+const RequisicaoList = (props) => {
   const countryBodyTemplate = (rowData) => {
     return (
         <React.Fragment>
@@ -40,7 +40,7 @@ const AtividadeList = (props) => {
   return(
   <div>   
     <div>
-      <h4>Listagem de  Atividade</h4>
+      <h4>Listagem de Requisicao</h4>
       <button
         button
         type="button"
@@ -57,16 +57,15 @@ const AtividadeList = (props) => {
         Inserir
       </button>
       <div className="card">
-        <DataTable value={props.atividade} responsiveLayout="scroll" selectionMode="single" paginator paginatorTemplate={template2} rows={8} 
+        <DataTable value={props.requisicoes} responsiveLayout="scroll" selectionMode="single" paginator paginatorTemplate={template2} rows={8} 
                     paginatorClassName="justify-content-center" className="mt-6">
           <Column field="titulo" header="titulo" sortable filter></Column>
           <Column field="descricao" header="descricao" sortable filter></Column>
+          <Column field="dataHora" header="dataHora" sortable filter></Column>
           <Column field="status" header="status" sortable filter></Column>
-          <Column field="prazo" header="prazo" sortable filter></Column>
-          <Column field="agendaInicio" header="agendaInicio" sortable filter></Column>
-          <Column field="dataHoraTermino" header="agendaTermino" sortable filter></Column>
-          <Column field="requisicao.titulo" header="requisicao" sortable filter></Column>
-          <Column field="colaborador.nome" header="colaborador" sortable filter></Column>
+          <Column field="prazoAtendimento" header="prazoAtendimento" sortable filter></Column>
+          <Column field="tipoRequisicao.descricao" header="tipoRequisicao" sortable filter></Column>
+          <Column field="solicitante.nome" header="solicitante" sortable filter></Column>
           <Column header="Operações" body={countryBodyTemplate}></Column>
           {/* <Column field={<button onClick={() => props.editar()} className="btn btn-light btn-sm">Editar</button>}></Column>  */}
         </DataTable>
@@ -75,4 +74,4 @@ const AtividadeList = (props) => {
   </div>
 );
   }
-export default AtividadeList;
+export default RequisicaoList;

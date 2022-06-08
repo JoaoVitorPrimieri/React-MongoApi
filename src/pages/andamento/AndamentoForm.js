@@ -14,10 +14,6 @@ const RequisicaoForm = (props) => {
 
     const onSubmit = data => {
         //console.log(data);
-
-
-
-
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

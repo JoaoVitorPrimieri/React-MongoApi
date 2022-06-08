@@ -30,6 +30,8 @@ const ColaboradorForm = (props) => {
      <div style={{padding:15}}>
             <div className="card">
                 <h5>Cadastro de Colaboradores</h5>
+                <div style={{marginLeft: "33em"}}>
+
                 <div className="p-fluid grid formgrid">
                     <div className="field col-12 md:col-4">
                         <label htmlFor="nome">Nome</label>
@@ -70,7 +72,7 @@ const ColaboradorForm = (props) => {
                                    onChange={ e => setContraSenha(e.target.value)} />
                     </div>
                 </div>                         
-
+</div>
 
 
 <div>
