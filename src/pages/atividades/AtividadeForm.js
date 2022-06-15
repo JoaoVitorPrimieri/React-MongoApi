@@ -56,7 +56,7 @@ const AtividadeForm = (props) => {
                   maxLength: { value: 50, message: 'O status pode ter no máximo 50 caracteres!' },
                   minLength: { value: 2, message: 'O status pode ter no mínimo 2 caracteres!' },
                 })}
-                  defaultValue={props.requisicao.status} onChange={handleInputChange} />
+                  defaultValue={props.atividade.status} onChange={handleInputChange} />
                 {errors.status && <span style={{ color: 'red' }}>{errors.status.message}</span>}
               </div>
             </div>
@@ -84,18 +84,18 @@ const AtividadeForm = (props) => {
             </div>
             <div className="p-fluid grid formgrid">
               <div className="field col-12 md:col-4">
-                <label htmlFor="Requisicao">Requisicao:</label>
-                <Dropdown value={props.atividade.requisicao} options={props.requisicao}
-                  optionLabel="titulo" optionValue="_id"
-                  onChange={handleInputChange} placeholder="Selecione o Tipo" />
+                <label htmlFor="requisicao">Requisicao:</label>
+                <Dropdown name="Requisicao" value={props.atividade.Requisicao}
+                  options={props.requisicoes} optionLabel="descricao" optionValue="_id"
+                  onChange={handleInputChange} placeholder="Selecione a Requisição" />
               </div>
             </div>
             <div className="p-fluid grid formgrid">
               <div className="field col-12 md:col-4">
                 <label htmlFor="colaborador">Colaborador:</label>
-                <Dropdown value={props.atividade.colaborador} options={props.colaborador}
-                  optionLabel="nome" optionValue="_id"
-                  onChange={handleInputChange} placeholder="Selecione o Tipo" />
+                <Dropdown name="Colaborador" value={props.atividade.Colaborador}
+                  options={props.colaboradores} optionLabel="nome" optionValue="_id"
+                  onChange={handleInputChange} placeholder="Selecione o Colaborador" />
               </div>
             </div>
           </div>

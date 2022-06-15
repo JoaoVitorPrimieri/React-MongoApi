@@ -1,6 +1,6 @@
 import axios from "../../services/api";
 class UsuarioSrv {
-    url = "/requisicao";
+    url = "/andamento";
     async listar() {
         return await axios.get(this.url).catch(err => { throw err; });
     }

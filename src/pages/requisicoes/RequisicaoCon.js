@@ -164,8 +164,9 @@ function RequisicaoCont() {
           requisicoes={requisicoes}
           inserir={inserir}
           editar={editar}
-          excluir={excluir} />
-
+          excluir={excluir} 
+          onClickAtualizar={onClickAtualizar}
+          />
         <Toast ref={toastRef} />
 
       </div>

@@ -20,7 +20,7 @@ function AndamentoCont() {
   const [atividades, setAtividades] = useState([]);
   const [andamentos, setAndamentos] = useState([]);
   const toastRef = useRef();
-  const initialState = { id: null, titulo: '', descricao: '', dataHora: '', status: '', prazoAtendimento: '', tipoRequisicao: '', solicitante: '' }
+  const initialState = { id: null, titulo: '', descricao: '', dataHora: '', colaborador: '', atividade: '' }
   const [andamento, setAndamento] = useState(initialState)
   const [editando, setEditando] = useState(false)
 
@@ -31,7 +31,7 @@ function AndamentoCont() {
       setColaboradores(response.data);
       toastRef.current.show({
         severity: "success",
-        summary: "tipoRequisicoes atualizados",
+        summary: "Colaboradores atualizados",
         life: 3000,
       });
     })
@@ -47,7 +47,7 @@ function AndamentoCont() {
       setAtividades(response.data);
       toastRef.current.show({
         severity: "success",
-        summary: "solicitantes atualizados",
+        summary: "Atividades atualizadas",
         life: 3000,
       });
     })
@@ -66,7 +66,7 @@ function AndamentoCont() {
         setAndamentos(response.data);
         toastRef.current.show({
           severity: "success",
-          summary: "Requisicao atualizado",
+          summary: "Andamento atualizado",
           life: 3000,
         });
       })
@@ -164,7 +164,9 @@ function AndamentoCont() {
           andamentos={andamentos}
           inserir={inserir}
           editar={editar}
-          excluir={excluir} />
+          excluir={excluir}
+          onClickAtualizar={onClickAtualizar}
+          />
 
         <Toast ref={toastRef} />
 

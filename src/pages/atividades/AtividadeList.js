@@ -57,7 +57,7 @@ const AtividadeList = (props) => {
         Inserir
       </button>
       <div className="card">
-        <DataTable value={props.atividade} responsiveLayout="scroll" selectionMode="single" paginator paginatorTemplate={template2} rows={8} 
+        <DataTable value={props.atividades} responsiveLayout="scroll" selectionMode="single" paginator paginatorTemplate={template2} rows={8} 
                     paginatorClassName="justify-content-center" className="mt-6">
           <Column field="titulo" header="titulo" sortable filter></Column>
           <Column field="descricao" header="descricao" sortable filter></Column>
@@ -65,8 +65,8 @@ const AtividadeList = (props) => {
           <Column field="prazo" header="prazo" sortable filter></Column>
           <Column field="agendaInicio" header="agendaInicio" sortable filter></Column>
           <Column field="dataHoraTermino" header="agendaTermino" sortable filter></Column>
-          <Column field="requisicao.titulo" header="requisicao" sortable filter></Column>
-          <Column field="colaborador.nome" header="colaborador" sortable filter></Column>
+          <Column field="Requisicao.titulo" header="requisicao" sortable filter></Column>
+          <Column field="Colaborador.nome" header="colaborador" sortable filter></Column>
           <Column header="Operações" body={countryBodyTemplate}></Column>
           {/* <Column field={<button onClick={() => props.editar()} className="btn btn-light btn-sm">Editar</button>}></Column>  */}
         </DataTable>

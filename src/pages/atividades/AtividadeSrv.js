@@ -1,5 +1,5 @@
 import axios from "../../services/api";
-class UsuarioSrv {
+class AtividadeSrv {
     url = "/atividade";
     async listar() {
         return await axios.get(this.url).catch(err => { throw err; });
@@ -27,4 +27,4 @@ class UsuarioSrv {
     }
 
 }
-export default new UsuarioSrv();
+export default new AtividadeSrv();

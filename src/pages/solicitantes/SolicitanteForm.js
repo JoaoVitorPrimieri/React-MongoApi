@@ -76,10 +76,10 @@ const SolicitanteForm = (props) => {
 
 
 <div>
-<Button type="submit" icon="pi pi-pencil" className="p-button-rounded p-button-text " 
-                       label="Salvar"></Button>
-                <Button type="button" icon="pi pi-trash" className="p-button-rounded p-button-text" 
-                       label="Cancelar" onClick={props.cancelar}></Button>
+<Button type="submit" icon="pi pi-pencil" className="p-button-rounded p-button-text "
+                            label="Salvar" onClick={props.salvar}></Button>
+                        <Button type="button" icon="pi pi-trash" className="p-button-rounded p-button-text"
+                            label="Cancelar" onClick={props.cancelar}></Button>
 
 </div>
 

@@ -31,13 +31,20 @@ function Menu() {
           {
             label: 'Atividade', icon: 'pi pi-fw pi-user',
             command: () => { navigate("/atividade") }
+          }, {
+            label: 'Andamento', icon: 'pi pi-fw pi-user',
+            command: () => { navigate("/andamento") }
           }
         ]
       },
-      {
-        label: 'Sair', icon: 'pi pi-fw pi-power-off'
-      }
-    ];
+      { label: 'Sair', icon: 'pi pi-sign-out',
+      command: () => {
+      sessionStorage.setItem('token',
+     ''); },
+      url:'/'
+      },
+      ];
+     
     return (
     <Menubar model={items} 
     />)

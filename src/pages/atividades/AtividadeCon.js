@@ -20,7 +20,7 @@ function AtividadeCont() {
   const [colaboradores, setColaboradores] = useState([]);
   const [atividades, setAtividades] = useState([]);
   const toastRef = useRef();
-  const initialState = { id: null, titulo: '', descricao: '', dataHora: '', status: '', prazoAtendimento: '', tipoRequisicao: '', solicitante: '' }
+  const initialState = { id: null, titulo: '', descricao: '', dataHora: '', status: '', prazoAtendimento: '', Requisicao: '', Colaborador: '' }
   const [atividade, setAtividade] = useState(initialState)
   const [editando, setEditando] = useState(false)
 
@@ -31,7 +31,7 @@ function AtividadeCont() {
       setRequisicoes(response.data);
       toastRef.current.show({
         severity: "success",
-        summary: "tipoRequisicoes atualizados",
+        summary: "Requisicoes atualizadas",
         life: 3000,
       });
     })
@@ -44,10 +44,10 @@ function AtividadeCont() {
     });
     ColaboradorSrv.listar()
     .then((response) => {
-      setRequisicoes(response.data);
+      setColaboradores(response.data);
       toastRef.current.show({
         severity: "success",
-        summary: "tipoRequisicoes atualizados",
+        summary: "Colaboradores atualizados",
         life: 3000,
       });
     })
@@ -64,10 +64,10 @@ function AtividadeCont() {
   const onClickAtualizar = () => {
     AtividadeSrv.listar()
       .then((response) => {
-        setColaboradores(response.data);
+        setAtividades(response.data);
         toastRef.current.show({
           severity: "success",
-          summary: "Requisicao atualizado",
+          summary: "Atividade atualizado",
           life: 3000,
         });
       })
@@ -165,7 +165,9 @@ function AtividadeCont() {
           atividades={atividades}
           inserir={inserir}
           editar={editar}
-          excluir={excluir} />
+          excluir={excluir}
+          onClickAtualizar={onClickAtualizar}
+          />
 
         <Toast ref={toastRef} />
 
